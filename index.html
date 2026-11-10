@@ -29,8 +29,10 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 .ctl output{font:500 1.05rem var(--serif);letter-spacing:.04em;min-width:5.2em;text-align:center}.ctl output i{font-style:normal;color:var(--mut)}
 .hint{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 4.6rem);left:0;right:0;text-align:center;font-size:.85rem;color:var(--mut);transition:opacity .4s;pointer-events:none}
 /* stage + book */
-#track{height:1800vh;position:relative}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:2600px;perspective-origin:50% 38%;display:grid;place-items:center}
+#track{height:2050vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+#scnc{position:absolute;left:0;top:0;width:100%;height:100%;z-index:2;overflow:hidden;background:#0a0e14;background:transparent}
+#scn{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;perspective:2600px;perspective-origin:50% 38%;display:grid;place-items:center}
 #rig{position:relative;width:0;height:0;transform-style:preserve-3d;transform:rotateX(16deg) rotateY(-24deg);margin-top:-2.5vh}
 #book{position:absolute;left:-26em;top:-17.5em;width:52em;height:35em;font-size:16px;transform-style:preserve-3d;will-change:transform;transform:translateX(-208px)}
 .shadow{position:absolute;left:50%;width:50%;bottom:-2.6em;height:3.4em;background:radial-gradient(ellipse at center,rgba(0,0,0,.6),transparent 68%);filter:blur(.5em);transform:translateZ(-40px)}
@@ -81,7 +83,10 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 #skip{position:absolute;right:max(1.2rem,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 1.2rem);border:1px solid rgba(255,255,255,.35);background:rgba(20,12,60,.35);color:#fff;padding:.5rem 1rem;border-radius:2rem;cursor:pointer;font-size:.82rem;backdrop-filter:blur(6px)}
 #skip:hover{background:rgba(20,12,60,.6)}
 /* laptop intro */
-#lap{position:absolute;inset:0;z-index:14;background:radial-gradient(60% 55% at 50% 42%,#1d2648,#0b0e1a 78%);display:grid;place-items:center;overflow:hidden;--lw:900px;font-size:calc(var(--lw)/62)}
+#lap,#lap2{position:absolute;inset:0;z-index:14;background:radial-gradient(60% 55% at 50% 42%,#1d2648,#0b0e1a 78%);display:grid;place-items:center;overflow:hidden;--lw:900px;font-size:calc(var(--lw)/62)}
+#lap2{z-index:1;visibility:hidden}
+.sc2{width:100%;height:100%}
+#lcap{position:absolute;left:0;right:0;bottom:9vh;margin:0;text-align:center;font:600 clamp(.7rem,1vw,.95rem) Inter;letter-spacing:.34em;text-transform:uppercase;color:#e6c79a;opacity:0;transition:none}
 .lscene{position:relative;width:var(--lw);height:calc(var(--lw)*.625);margin-top:-9vh;perspective:calc(var(--lw)*1.9);perspective-origin:50% -45%;transform-style:preserve-3d}
 .llid{position:absolute;inset:0;transform-origin:50% 100%;transform-style:preserve-3d;transform:rotateX(var(--ang,-84deg))}
 .lscr,.lback{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:1.3em 1.3em .5em .5em}
@@ -223,6 +228,7 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 
 <main id="track">
 <div class="stage">
+<div id="scnc"><div id="scn">
 <canvas id="wcv"></canvas>
 <div id="fx" aria-hidden="true">
   <div class="ty"><h2>Thank you.</h2><p>for visiting my portfolio</p><i></i></div>
@@ -366,6 +372,7 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
   </div>
 
 </div></div>
+</div></div>
 <div id="vid" aria-label="Introduction: Reyon hands you her portfolio book">
   <canvas id="cv"></canvas>
   <div id="vcap">Reyon S &middot; Portfolio</div>
@@ -388,6 +395,7 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
     </div>
   </div>
 </div>
+<div id="lap2" aria-hidden="true"><div class="lscene" id="lscene2"><div class="ldeck"><i></i></div><div class="llid" id="llid2"><div class="lscr"><div class="sc2" id="sc2"></div></div><div class="lback"><i>R</i></div></div></div><p id="lcap">Reyon S &middot; Portfolio</p></div>
 <div id="sd"><span>Scroll down</span><i></i></div>
 <button id="skip" type="button">Skip intro</button>
 <p class="hint" id="hint">Scroll to open the book</p>
@@ -436,7 +444,8 @@ function render(){
 /* nav, counter, progress */
 const T=()=>mob?TM:TD;
 const L=.1167,I=.312,D=I/(1-I),cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
-const goRaw=P=>scrollTo({top:track.offsetTop+P*(track.offsetHeight-innerHeight),behavior:reduce?'auto':'smooth'});
+const TL2=.12;
+const goRaw=P=>scrollTo({top:track.offsetTop+P*(1-TL2)*(track.offsetHeight-innerHeight),behavior:reduce?'auto':'smooth'});
 const go=p=>goRaw(I+(1-I)*p);
 /* video frames (scrubbed by scroll) */
 const FR=66,frames=new Array(FR),cv=$('#cv'),cx=cv.getContext('2d'),vid=$('#vid');let vp=0,vlast=-1;
@@ -474,6 +483,23 @@ function drawLap(l){
   const z=cl((l-.74)/.26),lidH=lw*.625,Z=por?w/(lw*.93):Math.max(w/(lw*.93),h/(lidH*.9));
   lsc.style.transform=`scale(${(1+(Z-1)*z*z*(3-2*z)).toFixed(3)})`;
   lsc.style.transformOrigin='50% 50%'}
+/* closing: the finished scene zooms out into the laptop screen, the screen goes dark and the lid closes */
+const lap2=$('#lap2'),lsc2=$('#lscene2'),llid2=$('#llid2'),sc2=$('#sc2'),scnc=$('#scnc'),scn=$('#scn'),lcap=$('#lcap');let closeOn=false;
+function drawClose(c){
+  const w=innerWidth,h=innerHeight;
+  if(c<=0){if(closeOn){closeOn=false;lap2.style.visibility='hidden';scnc.style.cssText='';scn.style.cssText='';lcap.style.opacity=0;$('.ctl').style.opacity=''}return}
+  closeOn=true;lap2.style.visibility='visible';
+  const por=w/h<1.1,lw=Math.min(w*(por?.9:.62),h*(por?.5:.98));lap2.style.setProperty('--lw',lw+'px');
+  const Zc=Math.max(w/(lw*.974),h/(lw*.588)),zo=e2(cl(c/.4)),op2=1-e2(cl((c-.58)/.34));
+  lsc2.style.transformOrigin='50% 50%';lsc2.style.transform='scale('+((1+(Zc-1)*(1-zo))*(1-(por?.4:.24)*(1-op2))).toFixed(4)+')';
+  llid2.style.setProperty('--ang',(-84+78*op2)+'deg');lsc2.style.translate='0 '+(-(1-op2)*16)+'vh';
+  const r=sc2.getBoundingClientRect(),m=e2(cl(c/.1));
+  const rx=0+(r.left-0)*m,ry=0+(r.top-0)*m,rw=w+(r.width-w)*m,rh=h+(r.height-h)*m,k=Math.min(rw/w,rh/h);
+  scnc.style.left=rx+'px';scnc.style.top=ry+'px';scnc.style.width=rw+'px';scnc.style.height=rh+'px';
+  scnc.style.background='#0a0e14';scnc.style.borderRadius=(.6*lw/62*m)+'px';
+  scnc.style.opacity=1-e2(cl((c-.5)/.1));
+  scn.style.width=w+'px';scn.style.height=h+'px';scn.style.left=(rw-w*k)/2+'px';scn.style.top=(rh-h*k)/2+'px';scn.style.transform='scale('+k.toFixed(4)+')';
+  lcap.style.opacity=cl((c-.88)/.1);$('.ctl').style.opacity=1-cl((c-.5)/.1)}
 /* ending: her walking video (scrubbed), then floating learning objects and thank you */
 const WF=144,wfr=new Array(WF),wcv=$('#wcv'),wcx=wcv.getContext('2d'),fxl=$('#fx'),ITS=$$('#fx .it'),TY=$('#fx .ty');let wlast=-1,wW=0,wH=0;
 for(let i=0;i<WF;i++){const im=new Image();im.decoding='async';im.onload=()=>{wfr[i]=im;if(S.wk>0&&Math.abs(i-Math.round(S.wk*(WF-1)))<2)drawWalk(true)};im.src='assets/w/'+String(i+1).padStart(3,'0')+'.webp'}
@@ -496,7 +522,7 @@ const chFirst=c=>mob?CHM.indexOf(c):c;
 CHS.slice(1).forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.dataset.c=i+1;b.onclick=()=>go(T()[chFirst(i+1)]);$('#dots').append(b)});
 const cta=document.createElement('button');cta.className='cta';cta.textContent='Let’s talk';cta.onclick=()=>go(T()[mob?8:4]);$('#dots').append(cta);
 function idx(){const t=T();let b=0;t.forEach((v,i)=>{if(Math.abs(prog-v)<Math.abs(prog-t[b]))b=i});return b}
-function setRaw(raw){prog=Math.max(0,(raw-I)/(1-I));vp=cl((raw-L)/(I-L));drawLap(cl(raw/L));drawVid(vp);$('#sd').style.opacity=raw<.008?1:0;ui()}
+function setRaw(raw0){const raw=Math.min(1,raw0/(1-TL2));drawClose(cl((raw0-(1-TL2))/TL2));prog=Math.max(0,(raw-I)/(1-I));vp=cl((raw-L)/(I-L));drawLap(cl(raw/L));drawVid(vp);$('#sd').style.opacity=raw<.008?1:0;ui()}
 function ui(){$('#bar').style.width=prog*100+'%';const i=idx(),c=mob?CHM[i]:i;
   $$('#dots button[data-c]').forEach(b=>b.classList.toggle('on',+b.dataset.c===c));
   $('#cnt').innerHTML=String(i+1).padStart(2,'0')+' <i>//</i> '+String(T().length).padStart(2,'0');
@@ -511,7 +537,7 @@ function bind(){
     gsap.matchMedia().add({m:'(max-width:767px)',d:'(min-width:768px)'},ctx=>{mob=!!ctx.conditions.m;layout();
       const t=gsap.timeline({defaults:{ease:'power2.inOut'},onUpdate:render,
         scrollTrigger:{trigger:track,start:'top top',end:'bottom bottom',scrub:reduce?true:.9,invalidateOnRefresh:true,onUpdate:s=>setRaw(s.progress)}});
-      t.to({},{duration:D+1},0);
+      t.to({},{duration:(D+1)/(1-TL2)},0);
       keys(mob).forEach(([k,s,d,to,ez])=>t.to(S,{[k]:to,duration:d,...(ez?{ease:ez}:{})},s+D));
       return()=>{S.a1=S.a2=S.a3=S.a4=S.a5=S.mv=S.wk=S.fx=0;S.cam=.5}});
   }else{
