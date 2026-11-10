@@ -101,8 +101,16 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 .lkb{position:absolute;left:5.5%;right:5.5%;top:6%;height:50%;display:flex;flex-direction:column;gap:.28em;padding:.4em;border-radius:.5em;background:#0b0f20;box-shadow:inset 0 0 0 .1em rgba(0,0,0,.5),0 .08em 0 rgba(255,255,255,.08)}
 .lkb div{flex:1;display:flex;gap:.28em}.lkb em{flex:var(--w,1);border-radius:.28em;background:linear-gradient(180deg,#232a4a,#151a33);box-shadow:0 .12em 0 #05070f,inset 0 .07em 0 rgba(255,255,255,.1)}
 .ldeck i{position:absolute;left:34%;right:34%;bottom:7%;height:27%;border-radius:.7em;background:linear-gradient(180deg,#2d3558,#232a4a);box-shadow:inset 0 0 0 .1em rgba(255,255,255,.1),inset 0 .15em .4em rgba(0,0,0,.35)}
-#lbg{position:absolute;inset:0;background:url(assets/lbg.webp) center/cover no-repeat}
-#lbg::after{content:"";position:absolute;inset:0;background:radial-gradient(75% 70% at 50% 40%,transparent 40%,rgba(8,11,26,.55)),linear-gradient(180deg,transparent 55%,rgba(8,11,26,.5))}
+#lbg{position:absolute;inset:0;overflow:hidden;background:radial-gradient(52% 46% at 50% 40%,rgba(70,100,215,.26),transparent 72%),radial-gradient(34% 34% at 80% 42%,rgba(110,70,210,.16),transparent 70%),linear-gradient(180deg,#0c1128,#090c1c)}
+#lbg::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(110,140,235,.07) 0 1px,transparent 1px 64px),repeating-linear-gradient(90deg,rgba(110,140,235,.07) 0 1px,transparent 1px 64px);-webkit-mask-image:radial-gradient(70% 65% at 50% 45%,#000 30%,transparent 100%);mask-image:radial-gradient(70% 65% at 50% 45%,#000 30%,transparent 100%)}
+.li{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);width:calc(var(--w)*1vw);transform:translate(-50%,-50%) translate(var(--px,0px),var(--py,0px));pointer-events:none;will-change:transform}
+.li img{display:block;width:100%;height:auto;animation:lfl var(--t,6s) ease-in-out var(--dl,0s) infinite;filter:drop-shadow(0 .9vw 1.4vw rgba(0,0,0,.5))}
+@keyframes lfl{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-.9vw) rotate(var(--rr,1.6deg))}}
+.li.ch{left:50%;top:calc(var(--y)*1vh);width:auto;height:58vh;transform:translate(-50%,0) translate(var(--px,0px),var(--py,0px))}
+.li.ch img{height:100%;width:auto;animation:none;filter:drop-shadow(0 0 3vw rgba(110,120,255,.25))}
+.lbt{position:absolute;left:0;right:0;top:11%;transform:translateY(-50%) translate(var(--px,0px),var(--py,0px));text-align:center;font:500 clamp(1.5rem,3.4vw,3.4rem)/1.1 var(--serif);color:#f4efe6;text-shadow:0 0 1.2em rgba(150,170,255,.35);padding:0 4vw;pointer-events:none}
+.lbt b{font-weight:500;background:linear-gradient(180deg,#ffe2a8,#e6c79a 60%,#b98f4c);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+@media (max-width:767px){.li{left:calc(var(--mx)*1%);top:calc(var(--my)*1%);width:calc(var(--mw)*1vw)}.li.ch,.li.nm{display:none}.lbt{top:10%;font-size:1.35rem}.lbt span{display:block}.lbt i{display:none}}
 .sc{position:relative;width:100%;height:100%;border-radius:.6em;overflow:hidden;background:radial-gradient(70% 60% at 50% 30%,#1c2547,#0c1020);opacity:0;font-size:1em}
 .sc .bar{display:flex;align-items:center;gap:.5em;padding:.6em .9em;background:#141a30;height:2.6em}
 .sc .dt{width:.7em;height:.7em;border-radius:50%;background:#2c3557}.sc .dt:nth-child(1){background:#e2575c}.sc .dt:nth-child(2){background:#e5b84f}.sc .dt:nth-child(3){background:#4cc27d}
@@ -384,7 +392,18 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
   <div id="vcap">Reyon S &middot; Portfolio</div>
 </div>
 <div id="lap" aria-label="Searching for Reyon S on a laptop">
-  <div id="lbg"></div>
+  <div id="lbg">
+    <div class="lbt" data-d="6"><b>Instructional Designer</b> <i>/</i> <span>eLearning Designer</span></div>
+    <div class="li nm" data-d="14" style="--x:8.6;--y:15;--w:8.4;--t:7s"><img src="assets/ic/badge.webp" alt=""></div>
+    <div class="li ch" data-d="8" style="--y:16"><img src="assets/ic/char.webp" alt=""></div>
+    <div class="li" data-d="30" style="--x:26;--y:25;--w:8;--mx:18;--my:33;--mw:16;--t:5.6s;--rr:-2deg"><img src="assets/ic/bulb.webp" alt=""></div>
+    <div class="li nm" data-d="22" style="--x:14;--y:42;--w:15;--t:6.4s;--dl:-1.2s"><img src="assets/ic/stack.webp" alt=""></div>
+    <div class="li" data-d="34" style="--x:71;--y:24;--w:7;--mx:22;--my:23;--mw:18;--t:5.2s;--dl:-.6s"><img src="assets/ic/a360.webp" alt=""></div>
+    <div class="li" data-d="38" style="--x:79.5;--y:24;--w:7;--mx:50;--my:23;--mw:18;--t:6s;--dl:-2s;--rr:-1.6deg"><img src="assets/ic/story.webp" alt=""></div>
+    <div class="li" data-d="32" style="--x:88;--y:24;--w:7;--mx:78;--my:23;--mw:18;--t:5.8s;--dl:-1.4s"><img src="assets/ic/vyond.webp" alt=""></div>
+    <div class="li" data-d="26" style="--x:77;--y:43;--w:10;--mx:50;--my:33;--mw:15;--t:6.6s;--dl:-.3s;--rr:2.4deg"><img src="assets/ic/clip.webp" alt=""></div>
+    <div class="li" data-d="36" style="--x:90;--y:43;--w:8;--mx:80;--my:33;--mw:15;--t:5.4s;--dl:-2.6s"><img src="assets/ic/target.webp" alt=""></div>
+  </div>
   <div class="lscene" id="lscene">
     <div class="ldeck"><div class="lkb"></div><i></i><b class="ledge"></b></div>
     <div class="llid" id="llid">
@@ -476,7 +495,11 @@ $('#skip').onclick=()=>goRaw(I+.002);
 /* laptop intro, scrubbed by scroll: lid opens, types Reyon S, searches, loads, zooms into the screen */
 const KR=[[...Array(13).fill(1),1.7],[1.5,...Array(12).fill(1),1.5],[1.8,...Array(11).fill(1),2.2],[2.3,...Array(10).fill(1),2.7],[1.2,1,1,1.2,5.6,1.2,1,1,1.2]];
 $$('.lkb').forEach(k=>k.innerHTML=KR.map(r=>'<div>'+r.map(w=>`<em style="--w:${w}"></em>`).join('')+'</div>').join(''));
-const lbg=$('#lbg');
+const lbg=$('#lbg'),LI=$$('#lbg [data-d]'),PX={x:0,y:0,cx:0,cy:0};
+addEventListener('pointermove',e=>{PX.x=e.clientX/innerWidth-.5;PX.y=e.clientY/innerHeight-.5},{passive:true});
+(function lpar(){PX.cx+=(PX.x-PX.cx)*.07;PX.cy+=(PX.y-PX.cy)*.07;
+  if(lbg.style.opacity!=='0')LI.forEach(el=>{const d=+el.dataset.d;el.style.setProperty('--px',(-PX.cx*d).toFixed(2)+'px');el.style.setProperty('--py',(-PX.cy*d*.8).toFixed(2)+'px')});
+  requestAnimationFrame(lpar)})();
 const lap=$('#lap'),llid=$('#llid'),lsc=$('#lscene'),scr=$('#sc'),TXT='Reyon S';
 function drawLap(l0){
   lbg.style.opacity=1-e2(cl(l0/.1));const l=cl((l0-.1)/.9);
