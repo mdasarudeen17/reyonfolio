@@ -90,13 +90,19 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 .lscene{position:relative;width:var(--lw);height:calc(var(--lw)*.625);margin-top:-9vh;perspective:calc(var(--lw)*1.9);perspective-origin:50% -45%;transform-style:preserve-3d}
 .llid{position:absolute;inset:0;transform-origin:50% 100%;transform-style:preserve-3d;transform:rotateX(var(--ang,-84deg))}
 .lscr,.lback{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:1.3em 1.3em .5em .5em}
-.lscr{background:#05070d;padding:.8em .8em 1.5em;box-shadow:0 0 0 .12em #3a4264,0 0 5em rgba(120,140,255,.18)}
-.lscr::after{content:"";position:absolute;left:50%;top:.28em;width:.5em;height:.5em;margin-left:-.25em;border-radius:50%;background:#1b2240}
-.lback{transform:rotateY(180deg);background:linear-gradient(155deg,#434c78,#1a2040 70%);display:grid;place-items:center;box-shadow:inset 0 0 0 .1em rgba(255,255,255,.08)}
-.lback i{width:7em;height:7em;border-radius:50%;display:grid;place-items:center;font:700 3.6em var(--serif);font-style:normal;color:var(--gold);box-shadow:inset 0 0 0 .08em rgba(230,199,154,.7)}
-.ldeck{position:absolute;left:-3%;top:100%;width:106%;height:calc(var(--lw)*.625);transform-origin:50% 0;transform:rotateX(90deg);border-radius:.6em .6em 1.6em 1.6em;background:linear-gradient(180deg,#2a3150,#1a2040);box-shadow:0 0 0 .1em rgba(255,255,255,.07),0 3em 5em rgba(0,0,0,.6)}
-.ldeck::before{content:"";position:absolute;left:6%;right:6%;top:8%;height:46%;border-radius:.5em;background:repeating-linear-gradient(90deg,#0f1428 0 5.2%,transparent 5.2% 6.6%),#0a0d1c;opacity:.85;-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 17%,transparent 17% 22%);mask-image:repeating-linear-gradient(180deg,#000 0 17%,transparent 17% 22%)}
-.ldeck i{position:absolute;left:36%;right:36%;bottom:9%;height:26%;border-radius:.6em;box-shadow:inset 0 0 0 .1em rgba(255,255,255,.1)}
+.lscr{background:#030409;padding:.8em .8em 1.5em;box-shadow:0 0 0 .1em #5a6388,0 0 0 .22em #1a2040,0 0 4em rgba(120,140,255,.16)}
+.lscr::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.09),rgba(255,255,255,0) 34%,rgba(255,255,255,0) 70%,rgba(255,255,255,.03))}
+.lscr::after{content:"";position:absolute;left:50%;top:.3em;width:.42em;height:.42em;margin-left:-.21em;border-radius:50%;background:radial-gradient(circle at 35% 35%,#3b4a8a,#0b0f22 70%);box-shadow:0 0 0 .08em #0d1124}
+.lback{transform:rotateY(180deg);background:linear-gradient(115deg,rgba(255,255,255,.1),transparent 30%,rgba(255,255,255,.05) 55%,transparent 75%),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px),linear-gradient(155deg,#5a6490,#2a3158 55%,#1a2040);display:grid;place-items:center;box-shadow:inset 0 0 0 .1em rgba(255,255,255,.08)}
+.lback i{width:7em;height:7em;border-radius:50%;display:grid;place-items:center;font:700 3.6em var(--serif);font-style:normal;color:var(--gold);box-shadow:inset 0 0 0 .08em rgba(230,199,154,.7),0 0 2.5em rgba(230,199,154,.18);text-shadow:0 0 .6em rgba(230,199,154,.4)}
+.lhinge{position:absolute;left:3%;right:3%;bottom:-.35em;height:.8em;border-radius:.5em;background:linear-gradient(180deg,#0b0e1f,#394066 45%,#0b0e1f)}
+.ldeck{position:absolute;left:-3%;top:100%;width:106%;height:calc(var(--lw)*.625);transform-origin:50% 0;transform:rotateX(90deg);transform-style:preserve-3d;border-radius:.6em .6em 1.6em 1.6em;background:linear-gradient(180deg,#4a5278,#323a60 14%,#283052 60%,#202748);box-shadow:inset 0 .12em 0 rgba(255,255,255,.18),0 0 0 .08em rgba(255,255,255,.06),0 3em 5em rgba(0,0,0,.65)}
+.ledge{position:absolute;left:0;right:0;top:100%;height:1em;transform-origin:50% 0;transform:rotateX(-90deg);border-radius:0 0 1.6em 1.6em/0 0 .7em .7em;background:linear-gradient(180deg,#6a7399,#363e66 40%,#1c2242);box-shadow:inset 0 .1em 0 rgba(255,255,255,.2)}
+.lkb{position:absolute;left:5.5%;right:5.5%;top:6%;height:50%;display:flex;flex-direction:column;gap:.28em;padding:.4em;border-radius:.5em;background:#0b0f20;box-shadow:inset 0 0 0 .1em rgba(0,0,0,.5),0 .08em 0 rgba(255,255,255,.08)}
+.lkb div{flex:1;display:flex;gap:.28em}.lkb em{flex:var(--w,1);border-radius:.28em;background:linear-gradient(180deg,#232a4a,#151a33);box-shadow:0 .12em 0 #05070f,inset 0 .07em 0 rgba(255,255,255,.1)}
+.ldeck i{position:absolute;left:34%;right:34%;bottom:7%;height:27%;border-radius:.7em;background:linear-gradient(180deg,#2d3558,#232a4a);box-shadow:inset 0 0 0 .1em rgba(255,255,255,.1),inset 0 .15em .4em rgba(0,0,0,.35)}
+#lbg{position:absolute;inset:0;background:url(assets/lbg.webp) center/cover no-repeat}
+#lbg::after{content:"";position:absolute;inset:0;background:radial-gradient(75% 70% at 50% 40%,transparent 40%,rgba(8,11,26,.55)),linear-gradient(180deg,transparent 55%,rgba(8,11,26,.5))}
 .sc{position:relative;width:100%;height:100%;border-radius:.6em;overflow:hidden;background:radial-gradient(70% 60% at 50% 30%,#1c2547,#0c1020);opacity:0;font-size:1em}
 .sc .bar{display:flex;align-items:center;gap:.5em;padding:.6em .9em;background:#141a30;height:2.6em}
 .sc .dt{width:.7em;height:.7em;border-radius:50%;background:#2c3557}.sc .dt:nth-child(1){background:#e2575c}.sc .dt:nth-child(2){background:#e5b84f}.sc .dt:nth-child(3){background:#4cc27d}
@@ -224,7 +230,7 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 <body>
 <div id="glow"></div>
 <div id="bar"></div>
-<nav aria-label="Book chapters"><span class="logo">R.S.</span><div class="dots" id="dots"></div></nav>
+<nav aria-label="Book chapters"><span class="logo">Reyon S</span><div class="dots" id="dots"></div></nav>
 
 <main id="track">
 <div class="stage">
@@ -378,8 +384,9 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
   <div id="vcap">Reyon S &middot; Portfolio</div>
 </div>
 <div id="lap" aria-label="Searching for Reyon S on a laptop">
+  <div id="lbg"></div>
   <div class="lscene" id="lscene">
-    <div class="ldeck"><i></i></div>
+    <div class="ldeck"><div class="lkb"></div><i></i><b class="ledge"></b></div>
     <div class="llid" id="llid">
       <div class="lscr"><div class="sc" id="sc">
         <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><div class="tab">New tab</div></div>
@@ -391,11 +398,11 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
         <div class="pg ldr" id="pgL"><div class="rs">RS</div><p>Opening portfolio</p><div class="pb"><i id="pbf"></i></div></div>
         <svg class="cur" id="cur" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.600L10 19z" fill="#fff" stroke="#14182c" stroke-width="1.400" stroke-linejoin="round"/></svg>
       </div></div>
-      <div class="lback"><i>R</i></div>
+      <span class="lhinge"></span><div class="lback"><i>R</i></div>
     </div>
   </div>
 </div>
-<div id="lap2" aria-hidden="true"><div class="lscene" id="lscene2"><div class="ldeck"><i></i></div><div class="llid" id="llid2"><div class="lscr"><div class="sc2" id="sc2"></div></div><div class="lback"><i>R</i></div></div></div><p id="lcap">Reyon S &middot; Portfolio</p></div>
+<div id="lap2" aria-hidden="true"><div class="lscene" id="lscene2"><div class="ldeck"><div class="lkb"></div><i></i><b class="ledge"></b></div><div class="llid" id="llid2"><div class="lscr"><div class="sc2" id="sc2"></div></div><span class="lhinge"></span><div class="lback"><i>R</i></div></div></div><p id="lcap">Reyon S &middot; Portfolio</p></div>
 <div id="sd"><span>Scroll down</span><i></i></div>
 <button id="skip" type="button">Skip intro</button>
 <p class="hint" id="hint">Scroll to open the book</p>
@@ -467,8 +474,12 @@ function drawVid(v,force){
   cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h)}
 $('#skip').onclick=()=>goRaw(I+.002);
 /* laptop intro, scrubbed by scroll: lid opens, types Reyon S, searches, loads, zooms into the screen */
+const KR=[[...Array(13).fill(1),1.7],[1.5,...Array(12).fill(1),1.5],[1.8,...Array(11).fill(1),2.2],[2.3,...Array(10).fill(1),2.7],[1.2,1,1,1.2,5.6,1.2,1,1,1.2]];
+$$('.lkb').forEach(k=>k.innerHTML=KR.map(r=>'<div>'+r.map(w=>`<em style="--w:${w}"></em>`).join('')+'</div>').join(''));
+const lbg=$('#lbg');
 const lap=$('#lap'),llid=$('#llid'),lsc=$('#lscene'),scr=$('#sc'),TXT='Reyon S';
-function drawLap(l){
+function drawLap(l0){
+  lbg.style.opacity=1-e2(cl(l0/.1));const l=cl((l0-.1)/.9);
   const op=l<.93?1:Math.max(0,1-(l-.93)/.07);lap.style.opacity=op;lap.style.visibility=op<=0?'hidden':'visible';
   const w=innerWidth,h=innerHeight,por=w/h<1.1,lw=Math.min(w*(por?.9:.62),h*(por?.5:.98));lap.style.setProperty('--lw',lw+'px');
   const op2=e2(cl(l/.26));llid.style.setProperty('--ang',(-84+78*op2)+'deg');lsc.style.translate='0 '+(-(1-op2)*16)+'vh';
@@ -481,7 +492,7 @@ function drawLap(l){
   const pb=cl((l-.72)/.14)*100;$('#pbf').style.width=pb+'%';$('#ld').style.width=(l>.7?pb:0)+'%';
   const u=$('#url');u.textContent=l>.7?'reyon-s.portfolio/book':(n?TXT.slice(0,n):'Search or type a web address');u.classList.toggle('on',n>0);
   const z=cl((l-.74)/.26),lidH=lw*.625,Z=por?w/(lw*.93):Math.max(w/(lw*.93),h/(lidH*.9));
-  lsc.style.transform=`scale(${(1+(Z-1)*z*z*(3-2*z)).toFixed(3)})`;
+  lsc.style.transform=`scale(${((1+(Z-1)*z*z*(3-2*z))*(.8+.2*e2(cl(l0/.22)))).toFixed(3)})`;
   lsc.style.transformOrigin='50% 50%'}
 /* closing: the finished scene zooms out into the laptop screen, the screen goes dark and the lid closes */
 const lap2=$('#lap2'),lsc2=$('#lscene2'),llid2=$('#llid2'),sc2=$('#sc2'),scnc=$('#scnc'),scn=$('#scn'),lcap=$('#lcap');let closeOn=false;
