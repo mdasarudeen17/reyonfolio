@@ -483,23 +483,22 @@ const TL2=.12;
 const goRaw=P=>scrollTo({top:track.offsetTop+P*(1-TL2)*(track.offsetHeight-innerHeight),behavior:reduce?'auto':'smooth'});
 const go=p=>goRaw(I+(1-I)*p);
 /* video frames (scrubbed by scroll) */
-const FR=66,frames=new Array(FR),cv=$('#cv'),cx=cv.getContext('2d'),vid=$('#vid');let vp=0,vlast=-1;
+const FR=72,frames=new Array(FR),cv=$('#cv'),cx=cv.getContext('2d'),vid=$('#vid');let vp=0,vlast=-1;
 for(let i=0;i<FR;i++){const im=new Image();im.decoding='async';im.onload=()=>{frames[i]=im;if(i===0||i===Math.min(FR-1,Math.floor(vp*.9*(FR-1))))drawVid(vp,true)};im.src='assets/f/'+String(i+1).padStart(3,'0')+'.webp'}
 function sizeCv(){const d=Math.min(devicePixelRatio||1,1.5);cv.width=Math.round(innerWidth*d);cv.height=Math.round(innerHeight*d);vlast=-1;drawVid(vp,true)}
 function drawVid(v,force){
   const op=v<.93?1:Math.max(0,1-(v-.93)/.07);
-  const z=Math.min(1,Math.max(0,(v-.5)/.43));cv.style.transform='scale('+(1+.32*z*z*(3-2*z)).toFixed(3)+')';
+  cv.style.transform='none';
   vid.style.opacity=op;vid.style.visibility=op<=0?'hidden':'visible';
   $('#vcap').style.opacity=v<.06?1:0;$('#skip').style.opacity=op>.5?1:0;
   let idx=Math.min(FR-1,Math.round(Math.min(1,v/.93)*(FR-1)));
   while(idx>0&&!frames[idx])idx--;
   const im=frames[idx];if(!im||(idx===vlast&&!force))return;vlast=idx;
   const cw=cv.width,ch=cv.height,iw=im.naturalWidth,ih=im.naturalHeight,portrait=cw/ch<1.2;
-  const sc=portrait?cw/(iw*.58):Math.max(cw/iw,ch/ih),w=iw*sc,h=ih*sc;
-  if(portrait){try{const t=document.createElement('canvas');t.width=2;t.height=2;const tc=t.getContext('2d');tc.drawImage(im,0,0,iw,ih,0,0,2,2);
-    const a=tc.getImageData(0,0,1,1).data,b=tc.getImageData(0,1,1,1).data,g=cx.createLinearGradient(0,0,0,ch);
-    g.addColorStop(0,`rgb(${a[0]},${a[1]},${a[2]})`);g.addColorStop(1,`rgb(${b[0]},${b[1]},${b[2]})`);cx.fillStyle=g;cx.fillRect(0,0,cw,ch)}catch(e){}}
-  cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h)}
+  const sc=portrait?cw/(iw*.52):Math.max(cw/iw,ch/ih),w=iw*sc,h=ih*sc,px=portrait?-.05*Math.min(1,v/.93)*w:0;
+  cx.clearRect(0,0,cw,ch);
+  if(portrait){const t0=(ch-h)/2/ch,f=h*.2/ch,m=`linear-gradient(180deg,transparent ${(t0*100).toFixed(1)}%,#000 ${((t0+f)*100).toFixed(1)}%,#000 ${((1-t0-f)*100).toFixed(1)}%,transparent ${((1-t0)*100).toFixed(1)}%)`;cv.style.webkitMaskImage=cv.style.maskImage=m}else cv.style.webkitMaskImage=cv.style.maskImage='none';
+  cx.drawImage(im,(cw-w)/2+px,(ch-h)/2,w,h)}
 $('#skip').onclick=()=>goRaw(I+.002);
 /* laptop intro, scrubbed by scroll: lid opens, types Reyon S, searches, loads, zooms into the screen */
 const KR=[[...Array(13).fill(1),1.7],[1.5,...Array(12).fill(1),1.5],[1.8,...Array(11).fill(1),2.2],[2.3,...Array(10).fill(1),2.7],[1.2,1,1,1.2,5.6,1.2,1,1,1.2]];
