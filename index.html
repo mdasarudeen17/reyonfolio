@@ -91,6 +91,7 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 /* laptop intro */
 #lap,#lap2{position:absolute;inset:0;z-index:14;background:radial-gradient(60% 55% at 50% 42%,#1d2648,#0b0e1a 78%);display:grid;place-items:center;overflow:hidden;--lw:900px;font-size:calc(var(--lw)/62)}
 #lap2{z-index:1;visibility:hidden}
+#lap,#lap2,#vid,#lbg{pointer-events:none}
 .sc2{width:100%;height:100%}
 #lcap{position:absolute;left:0;right:0;bottom:9vh;margin:0;text-align:center;font:600 clamp(.7rem,1vw,.95rem) Inter;letter-spacing:.34em;text-transform:uppercase;color:#e6c79a;opacity:0;transition:none}
 .lscene{position:relative;width:var(--lw);height:calc(var(--lw)*.625);margin-top:-9vh;perspective:calc(var(--lw)*1.9);perspective-origin:50% -45%;transform-style:preserve-3d}
@@ -159,9 +160,9 @@ nav .logo{font:500 1.7rem var(--serif);color:var(--ink);letter-spacing:.01em}
 /* mouse effects */
 #glow{position:fixed;left:0;top:0;width:36rem;height:36rem;margin:-18rem 0 0 -18rem;border-radius:50%;background:radial-gradient(circle,rgba(230,199,154,.11),transparent 62%);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s;will-change:transform}
 .stage{z-index:1}
-.bt{transform:translate(var(--bx,0px),var(--by,0px))}
-.bt:hover{transform:translate(var(--bx,0px),calc(var(--by,0px) - .1em))}
-.bt:active{transform:translate(var(--bx,0px),calc(var(--by,0px) + .1em))}
+.bt{translate:var(--bx,0px) var(--by,0px)}
+.bt:hover{translate:var(--bx,0px) calc(var(--by,0px) - .1em)}
+.bt:active{translate:var(--bx,0px) calc(var(--by,0px) + .1em)}
 .tg{transition:transform .2s,color .2s,box-shadow .2s}.tg:hover{transform:translateY(-.15em);color:var(--gold);box-shadow:inset 0 0 0 1px rgba(230,199,154,.5),0 .4em .8em rgba(0,0,0,.4)}
 .pjs li{position:relative}
 .pjs li a{position:relative;display:grid;grid-template-columns:2.2em 1fr;gap:.1em .5em;padding:.5em .5em .5em 0;color:inherit;text-decoration:none;border-radius:.7em;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s,padding .3s;overflow:hidden}
@@ -466,6 +467,7 @@ function render(){
   leaves.forEach((l,i)=>{const n=i+1,a=S['a'+n],s=Math.sin(a*Math.PI/180);
     l.style.transform=`translateZ(${(a>90?n:N+1-n)*1.5+s*26}px) rotateY(${-a}deg) skewY(${-s*1.6}deg)`;
     l.style.setProperty('--sf',a<90?s*.6:0);l.style.setProperty('--sb',a>90?s*.6:0)});
+  {let tf=-1,tb=-1;leaves.forEach((l,i)=>{if(S['a'+(i+1)]<=90){if(tf<0)tf=i}else tb=i});leaves.forEach((l,i)=>{l.style.pointerEvents=(i===tf||i===tb)?'auto':'none'})}
   const o=S.a1/180,op=Math.min(1,o*1.3),c5=S.a5/180;
   book.style.transform=`translateX(${-S.cam*pw}px)`;
   rig.style.transform=`translate(${S.mv*innerWidth*(mob?.25:.28)}px,${mob?-S.mv*innerHeight*.07:0}px) rotateX(${16*(1-o)+16*c5+TL.y}deg) rotateY(${-24*(1-o)+24*c5+TL.x}deg) scale(${1-S.mv*(mob?.5:.22)})`;
@@ -613,6 +615,10 @@ orb.addEventListener('pointermove',e=>{const r=orb.getBoundingClientRect();
   orb.style.setProperty('--mx',((e.clientX-r.left)/r.width*2-1).toFixed(2));orb.style.setProperty('--my',((e.clientY-r.top)/r.height*2-1).toFixed(2))});
 orb.addEventListener('pointerleave',()=>{orb.style.setProperty('--mx',0);orb.style.setProperty('--my',0)});
 
+/* 3D pages can confuse hit-testing: if a click lands beside a link/button drawn at that point, activate it */
+document.addEventListener('click',e=>{if(e.defaultPrevented||(e.target.closest&&e.target.closest('a[href],button')))return;
+  const a=document.elementsFromPoint(e.clientX,e.clientY).find(x=>x.matches&&x.matches('a[href],button:not([disabled])'));
+  if(a){e.preventDefault();e.stopPropagation();a.click()}},true);
 /* copy email */
 $('#copyBtn').addEventListener('click',function(){
   const t=$('#mailTxt'),lab=this.querySelector('span'),done=m=>{lab.textContent=m;setTimeout(()=>lab.textContent='Copy my email',1800)};
